@@ -16,6 +16,10 @@
 			$CURRENT_PAGE = "Linge"; 
 			$PAGE_TITLE = "Linge";
 			break;
+			case "/balek/couchage-partype.php":
+			$CURRENT_PAGE = "Par type"; 
+			$PAGE_TITLE = "Partype";
+			break;
 		default:
 			$CURRENT_PAGE = "Index";
 			$PAGE_TITLE = "Welcome to balek!";

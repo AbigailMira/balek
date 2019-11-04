@@ -9,5 +9,8 @@
 	  <li class="nav-item">
 	    <a class="nav-link <?php if ($CURRENT_PAGE == "Linge") {?>active<?php }?>" href="linge-list.php">Linge de lit</a>
 	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link <?php if ($CURRENT_PAGE == "Partype") {?>active<?php }?>" href="couchage-partype.php">Choix par type</a>
+	  </li>
 	</ul>
 </div>
