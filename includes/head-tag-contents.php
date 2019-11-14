@@ -1,4 +1,4 @@
-<?php include("includes/config.php");?>
+<?php include("config/config.php");?>
 
 <title><?php print $PAGE_TITLE;?></title>
 
