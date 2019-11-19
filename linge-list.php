@@ -28,9 +28,13 @@
     <?php
     $linge = getLinge();
     foreach ($linge as $row){
+    $piece = getPieceForLinge($row["idlinge"]);
     echo "<tr>
-    <td>".$row['libelle']."</td>     
-    <td>".$row['largeur']."x".$row['longeur']."</td>     
+    <td>".$row['libelle_linge']."</td>     
+    <td>".$row['largeur']."x".$row['longeur']."</td>
+    <td>".$row['theme']."</td>
+    <td>".$row['couleur']."</td>
+    <td>".$piece['libelle_piece']."</td>
     </tr>";
     }?>
   </tbody>
