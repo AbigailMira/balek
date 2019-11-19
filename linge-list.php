@@ -2,14 +2,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php include("includes/head-tag-contents.php");?>
+<?php include("includes/head-tag-contents.php");?>
 </head>
 <body>
 
 <?php include("includes/header.php");?>
 <?php include("includes/navigation-list.php");?>
+    
+<?php require("lingeControleur.php");?>
 
 <div class="container" id="main-content">
+    
+<?php getLinge();?> 
+    
 	<table class="table">
   <thead>
     <tr>

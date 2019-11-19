@@ -1,4 +1,7 @@
 <?php
+/**
+ * page variables
+ */
 	switch ($_SERVER["SCRIPT_NAME"]) {
 		case "/balek/about.php":
 			$CURRENT_PAGE = "About"; 
