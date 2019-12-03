@@ -11,15 +11,15 @@
 			$CURRENT_PAGE = "Contact"; 
 			$PAGE_TITLE = "Contact me";
 			break;
-		case "/balek/couchage-list.php":
+		case "/balek/couchage_list.php":
 			$CURRENT_PAGE = "Couchage"; 
 			$PAGE_TITLE = "Couchage";
 			break;
-		case "/balek/linge-list.php":
+		case "/balek/linge_list.php":
 			$CURRENT_PAGE = "Linge"; 
 			$PAGE_TITLE = "Linge";
 			break;
-			case "/balek/couchage-partype.php":
+			case "/balek/couchage_partype.php":
 			$CURRENT_PAGE = "Par type"; 
 			$PAGE_TITLE = "Partype";
 			break;

@@ -43,9 +43,9 @@
 	<h2>Welcome to balek!</h2>
 	<p>Inventorize you linen and bedding to externalize your memory and make it accessible to the entire household.</p>
 
-	<a href="../couchage-list.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Couchage</a>
-	<a href="../linge-list.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Linge de lit</a>
-	<a href="../couchage-partype.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Choisir par type de couchage</a>
+	<a href="../couchage_list.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Couchage</a>
+	<a href="../linge_list.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Linge de lit</a>
+	<a href="../couchage_partype.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Choisir par type de couchage</a>
 </div>
 
 <?php include("../includes/footer.php");?>
