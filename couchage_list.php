@@ -8,6 +8,9 @@
 
 <?php include("includes/header.php");?>
 <?php include("includes/navigation-list.php");?>
+    
+    <?php require("balekControleur.php");?>
+
 
 <div class="container" id="main-content">
 	<table class="table">
@@ -24,24 +27,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    <?php
+    $couchage = getCouchage();
+    $literie = getLiterie();
+    
+    foreach ($couchage as $row){
+    $piece = getPieceForCouchage($row["idcouchage"]);
+    
+    echo "<tr>
+    <td>".$row['libelle_couchage']."</td>     
+    <td>".$row['largeur']."x".$row['longeur']."</td>
+    <td>".$row['theme']."</td>
+    <td>".$row['couleur']."</td>
+    <td>".$piece['libelle_piece']."</td>
+    </tr>";
+    }?>
   </tbody>
 </table>
 </div>

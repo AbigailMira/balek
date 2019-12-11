@@ -5,10 +5,10 @@
 <?php include("includes/head-tag-contents.php");?>
 </head>
 <body>
-
 <?php include("includes/header.php");?>
-<?php include("includes/navigation-list.php");?>    
-<?php require("lingeControleur.php");?>
+<?php include("includes/navigation-list.php");?>   
+    
+<?php require("balekControleur.php");?>
 
 <div class="container" id="main-content">
     
