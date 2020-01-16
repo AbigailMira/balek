@@ -18,7 +18,6 @@
       <th scope="col">Type</th>
 	  <th scope="col">Taille</th>
       <th scope="col">Thème</th>
-      <th scope="col">Couleur</th>
 	  <th scope="col">Rangé</th>
 	  <th scope="col">Linge assorti</th>
 	  
@@ -28,13 +27,19 @@
     <?php
     $linge = getLinge();
     foreach ($linge as $row){
-    $piece = getPieceForLinge($row["idlinge"]);
+    $piece_linge = getPieceForLinge($row["idlinge"]);
     echo "<tr>
     <td>".$row['libelle_linge']."</td>     
-    <td>".$row['largeur']."x".$row['longeur']."</td>
-    <td>".$row['theme']."</td>
-    <td>".$row['couleur']."</td>
-    <td>".$piece['libelle_piece']."</td>
+    <td>".$row['personnes']."p.".$row['largeur']."x".$row['longeur']."</td>
+    <td>";
+    if ($row['theme'] != NULL){
+        echo "Imprimé ".$row['theme'];
+        }
+    else {
+        echo $row['couleur'];
+    }
+    echo "</td>
+    <td>".$piece_linge['libelle_piece']."</td>
     </tr>";
     }?>
   </tbody>

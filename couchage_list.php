@@ -32,14 +32,14 @@
     $literie = getLiterie();
     
     foreach ($couchage as $row){
-    $piece = getPieceForCouchage($row["idcouchage"]);
+    $piece_couchage = getPieceForCouchage($row["idcouchage"]);
     
     echo "<tr>
     <td>".$row['libelle_couchage']."</td>     
     <td>".$row['largeur']."x".$row['longeur']."</td>
-    <td>".$row['theme']."</td>
-    <td>".$row['couleur']."</td>
-    <td>".$piece['libelle_piece']."</td>
+    
+    
+    <td>".$piece_couchage['libelle_piece']."</td>
     </tr>";
     }?>
   </tbody>
