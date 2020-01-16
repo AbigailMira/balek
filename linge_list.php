@@ -16,7 +16,7 @@
   <thead>
     <tr>
       <th scope="col">Type</th>
-	  <th scope="col">Taille</th>
+	  <th scope="col">Lit</th>
       <th scope="col">Thème</th>
 	  <th scope="col">Rangé</th>
 	  <th scope="col">Linge assorti</th>
@@ -30,7 +30,16 @@
     $piece_linge = getPieceForLinge($row["idlinge"]);
     echo "<tr>
     <td>".$row['libelle_linge']."</td>     
-    <td>".$row['personnes']."p.".$row['largeur']."x".$row['longeur']."</td>
+    <td>";
+    if ($row['largeur'] == 70){
+            echo "Lit d'enfant Ikea";
+        }
+        elseif ($row['largeur'] == 160){
+            if ($row['couleur'] == 'Pourpre' || $row['couleur'] == 'Safran') {
+                echo "Lit des parents";
+            }            
+        }
+    echo "</td>
     <td>";
     if ($row['theme'] != NULL){
         echo "Imprimé ".$row['theme'];
