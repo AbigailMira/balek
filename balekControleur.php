@@ -9,7 +9,7 @@ function getCouchage()
     global $conn;
     try 
     {
-        $couchage = $conn->query("SELECT * FROM couchage JOIN taille ON couchage.fk_taille_couchage = taille.idtaille")->fetchAll();
+        $couchage = $conn->query("SELECT * FROM item i JOIN taille t ON i.fk_ite_idtaille = t.idtaille where fk_ite_idtype < 5")->fetchAll();
         return $couchage;
     } 
     catch (PDOException $e) 
@@ -25,7 +25,7 @@ function getLiterie()
     global $conn;
     try 
     {
-        $literie = $conn->query("SELECT * FROM literie JOIN taille ON literie.fk_taille_literie = taille.idtaille")->fetchAll();
+        $literie = $conn->query("SELECT * FROM item i JOIN taille t ON i.fk_ite_idtaille = t.idtaille where fk_ite_idtype in (5,6)")->fetchAll();
         return $literie;
     } 
     catch (PDOException $e) 
@@ -41,7 +41,7 @@ function getLinge()
     global $conn;
     try 
     {
-        $linge = $conn->query("SELECT * from linge JOIN taille on linge.fk_taille_linge = taille.idtaille")->fetchAll();
+        $linge = $conn->query("SELECT * FROM item i JOIN taille t ON i.fk_ite_idtaille = t.idtaille where fk_ite_idtype > 6")->fetchAll();
         return $linge;
     } 
     catch (PDOException $e) 
