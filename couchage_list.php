@@ -17,7 +17,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Matelas</th>
+      <th scope="col">Personnes</th>
 	  <th scope="col">Couette</th>
 	  <th scope="col">Oreiller 1</th>
 	  <th scope="col">Oreiller 2</th>
@@ -29,17 +29,13 @@
   <tbody>
     <?php
     $couchage = getCouchage();
-    $literie = getLiterie();
-    
+    $literie = getLiterie();    
     foreach ($couchage as $row){
-    $piece_couchage = getPieceForCouchage($row["idcouchage"]);
-    
+    $piece_couchage = getPieceForItem($row["iditem"]);    
     echo "<tr>
-    <td>".$row['libelle_couchage']."</td>     
-    <td>".$row['largeur']."x".$row['longeur']."</td>
-    
-    
-    <td>".$piece_couchage['libelle_piece']."</td>
+    <td>".$row['t_libelle']."</td>     
+    <td>".$row['personnes']." personnes"."</td> 
+    <td>".$piece_couchage['p_libelle']."</td>
     </tr>";
     }?>
   </tbody>

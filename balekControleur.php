@@ -9,7 +9,7 @@ function getCouchage()
     global $conn;
     try 
     {
-        $couchage = $conn->query("SELECT * FROM item i JOIN taille t ON i.fk_ite_idtaille = t.idtaille where fk_ite_idtype < 5")->fetchAll();
+        $couchage = $conn->query("SELECT * FROM item i JOIN type ty JOIN taille ta ON i.fk_taille = ta.idtaille AND i.fk_type = ty.idtype where fk_type < 5")->fetchAll();
         return $couchage;
     } 
     catch (PDOException $e) 
@@ -25,7 +25,7 @@ function getLiterie()
     global $conn;
     try 
     {
-        $literie = $conn->query("SELECT * FROM item i JOIN taille t ON i.fk_ite_idtaille = t.idtaille where fk_ite_idtype in (5,6)")->fetchAll();
+        $literie = $conn->query("SELECT * FROM item i JOIN type ty JOIN taille ta ON i.fk_taille = ta.idtaille AND i.fk_type = ty.idtype where fk_type in (5,6)")->fetchAll();
         return $literie;
     } 
     catch (PDOException $e) 
@@ -41,7 +41,7 @@ function getLinge()
     global $conn;
     try 
     {
-        $linge = $conn->query("SELECT * FROM item i JOIN taille t ON i.fk_ite_idtaille = t.idtaille where fk_ite_idtype > 6")->fetchAll();
+        $linge = $conn->query("SELECT * FROM item i JOIN type ty JOIN taille ta JOIN appartenance a ON i.fk_appartenance = a.idappartenance AND i.fk_taille = ta.idtaille AND i.fk_type = ty.idtype WHERE fk_type > 6")->fetchAll();
         return $linge;
     } 
     catch (PDOException $e) 
@@ -50,16 +50,16 @@ function getLinge()
     }
 }
 /* 
- * requete pour sélectionner les pieces où se trouvent les items de couchage (lits, matelas)
+ * requete pour sélectionner les pieces où se trouvent les items 
  */
-function getPieceForCouchage($idcouchage) 
+function getPieceForItem($iditem) 
 {
     global $conn;
     
     try 
-    { //todo : requete
-        $piece_couchage = $conn->query("SELECT libelle_piece FROM rangement JOIN piece JOIN couchage on rangement.fk_idpiece_rangement = piece.idpiece and rangement.fk_idcouchage_rangement = couchage.idcouchage WHERE couchage.idcouchage = $idcouchage")->fetch();
-        return $piece_couchage;
+    {
+        $piece_item = $conn->query("SELECT p_libelle from piece p join item i on i.fk_piece = p.idpiece where i.iditem = $iditem")->fetch();
+        return $piece_item;
     } 
     catch (PDOException $e) 
     {
@@ -69,37 +69,37 @@ function getPieceForCouchage($idcouchage)
 /* 
  * requete pour sélectionner les pieces où sont rangés les items de literie (couettes, oreillers)
  */
-function getPieceForLiterie($idliterie) 
-{
-    global $conn;
-    
-    try 
-    {
-        $piece_literie = $conn->query("SELECT libelle_piece FROM rangement JOIN piece JOIN linge on rangement.fk_idpiece_rangement = piece.idpiece and rangement.fk_idlinge_rangement = linge.idliterie WHERE linge.idliterie = $idliterie")->fetch();
-        return $piece_literie;
-    } 
-    catch (PDOException $e) 
-    {
-        echo "Connection failed: " . $e->getMessage();
-    }
-}
+//function getPieceForLiterie($idliterie) 
+//{
+//    global $conn;
+//    
+//    try 
+//    {
+//        $piece_literie = $conn->query("SELECT libelle_piece FROM rangement JOIN piece JOIN linge on rangement.fk_idpiece_rangement = piece.idpiece and rangement.fk_idlinge_rangement = linge.idliterie WHERE linge.idliterie = $idliterie")->fetch();
+//        return $piece_literie;
+//    } 
+//    catch (PDOException $e) 
+//    {
+//        echo "Connection failed: " . $e->getMessage();
+//    }
+//}
 /* 
  * requete pour sélectionner les pieces où sont rangés les items de linge (draps, housses)
  */
-function getPieceForLinge($idlinge) 
-{
-    global $conn;
-    
-    try 
-    {
-        $piece_linge = $conn->query("SELECT libelle_piece FROM rangement JOIN piece JOIN linge on rangement.fk_idpiece_rangement = piece.idpiece and rangement.fk_idlinge_rangement = linge.idlinge WHERE linge.idlinge = $idlinge")->fetch();
-        return $piece_linge;
-    } 
-    catch (PDOException $e) 
-    {
-        echo "Connection failed: " . $e->getMessage();
-    }
-}
+//function getPieceForLinge($idlinge) 
+//{
+//    global $conn;
+//    
+//    try 
+//    {
+//        $piece_linge = $conn->query("SELECT libelle_piece FROM rangement JOIN piece JOIN linge on rangement.fk_idpiece_rangement = piece.idpiece and rangement.fk_idlinge_rangement = linge.idlinge WHERE linge.idlinge = $idlinge")->fetch();
+//        return $piece_linge;
+//    } 
+//    catch (PDOException $e) 
+//    {
+//        echo "Connection failed: " . $e->getMessage();
+//    }
+//}*/
 /* 
  * requete pour sélectionner les associations compatibles de literie par couchage
  */
