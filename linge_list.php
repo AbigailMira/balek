@@ -7,17 +7,16 @@
 <body>
 <?php include("includes/header.php");?>
 <?php include("includes/navigation-list.php");?>   
-    
 <?php require("balekControleur.php");?>
 
 <div class="container" id="main-content">
     
-<table class="table">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
         <th scope="col">Couchage</th>
         <th scope="col">Thème/Couleur</th>
-        <th scope="col">Type</th>
+        <th scope="col">Utilisation</th>
         <th scope="col">Rangé</th>
         <th scope="col">Linge assorti</th>	  
     </tr>
@@ -47,8 +46,21 @@
         }
     echo "</td>    
     <td>".$piece_linge['p_libelle']."</td>
-    </tr>";
-    }?>
+    <td>";
+    $first = true;
+    $linge_assorti = getAssortiForItem($row['iditem'], $row['theme']);
+    foreach ($linge_assorti as $row_assorti){        
+        if ($first == false){
+            echo ", ";
+        }
+        else {
+            $first = false;
+        }
+        echo $row_assorti['t_libelle'];                
+        }                
+    "</tr>";
+    }
+    ?>
   </tbody>
 </table>
 </div>

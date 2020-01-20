@@ -8,12 +8,11 @@
 
 <?php include("includes/header.php");?>
 <?php include("includes/navigation-list.php");?>
-    
-    <?php require("balekControleur.php");?>
+<?php require("balekControleur.php");?>
 
 
 <div class="container" id="main-content">
-	<table class="table">
+	<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -37,7 +36,8 @@
     <td>".$row['personnes']." personnes"."</td> 
     <td>".$piece_couchage['p_libelle']."</td>
     </tr>";
-    }?>
+    }
+    ?>
   </tbody>
 </table>
 </div>

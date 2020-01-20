@@ -67,6 +67,46 @@ function getPieceForItem($iditem)
     }
 }
 /* 
+ * requete pour sélectionner les item assortis pour un item
+ */
+function getAssortiForItem($iditem, $theme) 
+{
+    global $conn;
+    
+    try 
+    {
+        $assorti_item = $conn->query("SELECT i.iditem, i.theme, i.couleur, t.t_libelle as t_libelle
+                                    FROM item i 
+                                    JOIN type t
+                                    ON i.fk_type = t.idtype
+                                    WHERE i.theme = '$theme'
+                                    AND i.iditem != $iditem")->fetchAll();
+        return $assorti_item;
+    } 
+    catch (PDOException $e) 
+    {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+function getLiterieForCouchage($fk_type) 
+{
+    global $conn;
+    try 
+    {
+        $literie_couchage = $conn->query("SELECT 
+	t.t_libelle, ta.personnes, i.theme, i.couleur
+FROM
+	item i JOIN taille ta JOIN type t ON ta.idtaille = i.fk_taille AND t.idtype = i.fk_type
+WHERE
+	i.fk_type = $fk_type")->fetchAll();
+        return $literie_couchage;
+    } 
+    catch (PDOException $e) 
+    {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+/* 
  * requete pour sélectionner les pieces où sont rangés les items de literie (couettes, oreillers)
  */
 //function getPieceForLiterie($idliterie) 
@@ -103,24 +143,5 @@ function getPieceForItem($iditem)
 /* 
  * requete pour sélectionner les associations compatibles de literie par couchage
  */
-function getLiterieForCouchage() 
-{
-    global $conn;
-    try 
-    {
-        $literie_couchage = $conn->query("SELECT 
-	libelle_couchage, taille_couchage.personnes, 
-	libelle_literie, taille_literie.personnes
-FROM
-	couchage JOIN taille AS taille_couchage ON couchage.fk_taille_couchage = taille_couchage.idtaille,
-    literie JOIN taille AS taille_literie ON literie.fk_taille_literie = taille_literie.idtaille
-WHERE
-	taille_couchage.personnes = taille_literie.personnes")->fetchAll();
-        return $literie_couchage;
-    } 
-    catch (PDOException $e) 
-    {
-        echo "Connection failed: " . $e->getMessage();
-    }
-}
+
 
