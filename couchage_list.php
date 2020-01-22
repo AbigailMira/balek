@@ -15,7 +15,7 @@
 	<table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Type</th>
       <th scope="col">Personnes</th>
 	  <th scope="col">Couette</th>
 	  <th scope="col">Oreiller 1</th>
@@ -30,12 +30,12 @@
     $couchage = getCouchage();
     $literie = getLiterie();    
     foreach ($couchage as $row){
-    $piece_couchage = getPieceForItem($row["iditem"]);    
-    echo "<tr>
-    <td>".$row['t_libelle']."</td>     
-    <td>".$row['personnes']." personnes"."</td> 
-    <td>".$piece_couchage['p_libelle']."</td>
-    </tr>";
+        $piece_couchage = getPieceForItem($row["iditem"]);    
+        echo "<tr>
+        <td>".$row['t_libelle']."</td>     
+        <td>".$row['personnes']." personnes"."</td> 
+        <td>".$piece_couchage['p_libelle']."</td>
+        </tr>";
     }
     ?>
   </tbody>

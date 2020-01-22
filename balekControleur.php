@@ -1,4 +1,14 @@
 <?php
+/*
+ * Liste des fonctions :
+ *  getCouchage()
+ *  getLiterie()
+ *  getLinge()
+ *  getPieceForItem($iditem)
+ *  getAssortiForItem($iditem, $theme)
+ *  getToutForCouchage()
+ */
+
 /* 
  * requete pour sélectionner tout le couchage et afficher une liste
  */
@@ -9,7 +19,11 @@ function getCouchage()
     global $conn;
     try 
     {
-        $couchage = $conn->query("SELECT * FROM item i JOIN type ty JOIN taille ta ON i.fk_taille = ta.idtaille AND i.fk_type = ty.idtype where fk_type < 5")->fetchAll();
+        $couchage = $conn->query("SELECT * 
+                                  FROM item i 
+                                  JOIN type ty JOIN taille ta JOIN appartenance a
+                                  ON i.fk_taille = ta.idtaille AND i.fk_type = ty.idtype AND i.fk_appartenance = a.idappartenance
+                                  WHERE fk_type < 5")->fetchAll();
         return $couchage;
     } 
     catch (PDOException $e) 
@@ -88,17 +102,22 @@ function getAssortiForItem($iditem, $theme)
         echo "Connection failed: " . $e->getMessage();
     }
 }
-function getLiterieForCouchage($fk_type) 
+/* 
+ * requete pour sélectionner la literie et le linge convenant à un couchage
+ */
+function getToutForCouchage() 
 {
     global $conn;
     try 
     {
         $literie_couchage = $conn->query("SELECT 
-	t.t_libelle, ta.personnes, i.theme, i.couleur
-FROM
-	item i JOIN taille ta JOIN type t ON ta.idtaille = i.fk_taille AND t.idtype = i.fk_type
-WHERE
-	i.fk_type = $fk_type")->fetchAll();
+                                            *, COUNT(*) AS quantite
+                                          FROM
+                                           item i JOIN taille ta JOIN type t JOIN appartenance a
+                                          ON ta.idtaille = i.fk_taille AND t.idtype = i.fk_type AND a.idappartenance = fk_appartenance
+                                          WHERE
+                                           i.fk_type >= 5
+                                          GROUP by matiere, fk_taille, fk_type, theme, couleur, fk_appartenance")->fetchAll();
         return $literie_couchage;
     } 
     catch (PDOException $e) 
@@ -106,42 +125,5 @@ WHERE
         echo "Connection failed: " . $e->getMessage();
     }
 }
-/* 
- * requete pour sélectionner les pieces où sont rangés les items de literie (couettes, oreillers)
- */
-//function getPieceForLiterie($idliterie) 
-//{
-//    global $conn;
-//    
-//    try 
-//    {
-//        $piece_literie = $conn->query("SELECT libelle_piece FROM rangement JOIN piece JOIN linge on rangement.fk_idpiece_rangement = piece.idpiece and rangement.fk_idlinge_rangement = linge.idliterie WHERE linge.idliterie = $idliterie")->fetch();
-//        return $piece_literie;
-//    } 
-//    catch (PDOException $e) 
-//    {
-//        echo "Connection failed: " . $e->getMessage();
-//    }
-//}
-/* 
- * requete pour sélectionner les pieces où sont rangés les items de linge (draps, housses)
- */
-//function getPieceForLinge($idlinge) 
-//{
-//    global $conn;
-//    
-//    try 
-//    {
-//        $piece_linge = $conn->query("SELECT libelle_piece FROM rangement JOIN piece JOIN linge on rangement.fk_idpiece_rangement = piece.idpiece and rangement.fk_idlinge_rangement = linge.idlinge WHERE linge.idlinge = $idlinge")->fetch();
-//        return $piece_linge;
-//    } 
-//    catch (PDOException $e) 
-//    {
-//        echo "Connection failed: " . $e->getMessage();
-//    }
-//}*/
-/* 
- * requete pour sélectionner les associations compatibles de literie par couchage
- */
 
 

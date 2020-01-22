@@ -14,7 +14,7 @@
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-        <th scope="col">Couchage</th>
+        <th scope="col">Type</th>
         <th scope="col">Thème/Couleur</th>
         <th scope="col">Utilisation</th>
         <th scope="col">Rangé</th>
@@ -25,40 +25,40 @@
     <?php
     $linge = getLinge();
     foreach ($linge as $row){
-    $piece_linge = getPieceForItem($row["iditem"]);
-    echo "<tr>
-    <td>".$row['t_libelle']."</td>  
-    <td>";
-    if ($row['theme'] != NULL && $row['couleur'] != NULL){
-        echo "Imprimé ".$row['theme']." ".$row['couleur'];
-        }
-    elseif ($row['theme'] != NULL) {
-    echo "Imprimé ".$row['theme'];
-    }
-    else {
-        echo $row['couleur'];
-    }
-    if ($row['idappartenance'] == 5){
-        echo "<td>".$row['a_libelle']." ".$row['personnes']." personnes"."</td>";
-    }
-    else {
-        echo "<td>".$row['a_libelle']."</td>";
-        }
-    echo "</td>    
-    <td>".$piece_linge['p_libelle']."</td>
-    <td>";
-    $first = true;
-    $linge_assorti = getAssortiForItem($row['iditem'], $row['theme']);
-    foreach ($linge_assorti as $row_assorti){        
-        if ($first == false){
-            echo ", ";
+        $piece_linge = getPieceForItem($row["iditem"]);
+        echo "<tr>
+        <td>".$row['t_libelle']." (".$row['largeur']."x".$row['longeur'].")"."</td>  
+        <td>";
+        if ($row['theme'] != NULL && $row['couleur'] != NULL){
+            echo "Imprimé ".$row['theme']." ".$row['couleur'];
+            }
+        elseif ($row['theme'] != NULL) {
+        echo "Imprimé ".$row['theme'];
         }
         else {
-            $first = false;
+            echo $row['couleur'];
         }
-        echo $row_assorti['t_libelle'];                
-        }                
-    "</tr>";
+        if ($row['idappartenance'] == 5){
+            echo "<td>".$row['a_libelle']." ".$row['personnes']." personnes"."</td>";
+        }
+        else {
+            echo "<td>".$row['a_libelle']."</td>";
+            }
+        echo "</td>    
+        <td>".$piece_linge['p_libelle']."</td>
+        <td>";
+        $first = true;
+        $linge_assorti = getAssortiForItem($row['iditem'], $row['theme']);
+        foreach ($linge_assorti as $row_assorti){        
+            if ($first == false){
+                echo ", ";
+            }
+            else {
+                $first = false;
+            }
+            echo $row_assorti['t_libelle'];                
+            }                
+        "</tr>";
     }
     ?>
   </tbody>
