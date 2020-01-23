@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-sm">
             <h1>Couchage 2 personnes</h1>
-            <!--Tableau à 3 colonnes : Lit (couchage + drap-housses); Couette (couette + housses); Oreillers (oreillers + housses) -->
+            <!--Tableau à 4 colonnes : Lit (couchage + drap-housses); Pièce où le trouver (pragmatique) ; Couette (couette + housses); Oreillers (oreillers + housses) -->
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -72,6 +72,7 @@
                                                 echo ", ";
                                             }
                                             else {
+                                                echo "Oreillers : ";
                                                 $first = false;
                                             }    
                                         echo $row_t['quantite']." ".$row_t['matiere'];
@@ -89,6 +90,7 @@
                                                     echo ", ";
                                                 }
                                                 else {
+                                                    echo "Housses : ";
                                                     $first = false;
                                                 }    
                                             echo $row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur'];
@@ -110,7 +112,7 @@
     <div class="row">
         <div class="col-sm">
             <h1>Couchage 1 personne</h1>
-            <!--Tableau à 3 colonnes : Lit (couchage + drap-housses); Couette (couette + housses); Oreillers (oreillers + housses) -->
+            <!--Tableau à 4 colonnes : Lit (couchage + drap-housses); Pièce où le trouver (pragmatique) ; Couette (couette + housses); Oreillers (oreillers + housses) -->
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -141,6 +143,9 @@
                                 <td>";    
                                 $first = true;
                                 $tout_lit = getToutForCouchage($row_c["iditem"]);
+                                /*
+                                 * Selection de la couette et du linge approprié
+                                 */
                                 foreach ($tout_lit as $row_t){                                                                         
                                     if ($row_t['fk_type'] == 8 && $row_t['personnes'] == 1 && $row_c['fk_appartenance'] == $row_t['fk_appartenance']){
                                         if ($first == false){
@@ -164,21 +169,35 @@
                                                 echo ", ";
                                             }
                                             else {
+                                                echo "Oreillers : ";
                                                 $first = false;
                                             }    
                                         echo $row_t['quantite']." ".$row_t['matiere'];
                                     }
-                                    elseif ($row_t['fk_type'] == 9 && $row_c['fk_appartenance'] == $row_t['fk_appartenance']){
-                                        if ($first == false){
-                                                echo ", ";
-                                            }
-                                            else {
-                                                $first = false;
-                                            }    
-                                        echo $row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur'];
-                                    } 
-                                } 
-                                "</tr>";
+                                }
+                                
+                                // retour à la ligne si type différent
+                                $different = true;                                
+                                $first = true;
+                                foreach ($tout_lit as $row_t){
+                                    if ($different == false){
+                                        if ($row_t['fk_type'] == 9 && $row_c['fk_appartenance'] == $row_t['fk_appartenance']){
+                                            if ($first == false){
+                                                    echo ", ";
+                                                }
+                                                else {
+                                                    echo "Housses : ";
+                                                    $first = false;
+                                                }    
+                                            echo $row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur'];
+                                        }                                    
+                                    }
+                                    else {
+                                        echo '<br>';
+                                        $different = false;
+                                    }
+                                }
+                                "</td></tr>";
                             }
                         }
                     ?>

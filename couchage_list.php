@@ -12,34 +12,35 @@
 
 
 <div class="container" id="main-content">
-	<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Type</th>
-      <th scope="col">Personnes</th>
-	  <th scope="col">Couette</th>
-	  <th scope="col">Oreiller 1</th>
-	  <th scope="col">Oreiller 2</th>
-	  <th scope="col">Oreiller 3</th>
-	  <th scope="col">Oreiller 4</th>
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Open modal
+</button>
 
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    $couchage = getCouchage();
-    $literie = getLiterie();    
-    foreach ($couchage as $row){
-        $piece_couchage = getPieceForItem($row["iditem"]);    
-        echo "<tr>
-        <td>".$row['t_libelle']."</td>     
-        <td>".$row['personnes']." personnes"."</td> 
-        <td>".$piece_couchage['p_libelle']."</td>
-        </tr>";
-    }
-    ?>
-  </tbody>
-</table>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Lazarine</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <img src="https://cdn.laredoute.com/products/680by680/9/a/9/9a92b99edd55969a55e5bd3cd71a965a.jpg"
+             alt="image du thème Lazarine" width="500" height="333">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <?php include("includes/footer.php");?>

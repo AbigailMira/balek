@@ -10,12 +10,12 @@
 <?php require("balekControleur.php");?>
 
 <div class="container" id="main-content">
-    
+                <!--Tableau à 4 colonnes : Item (type, thème/couleur, img modal) ; Utilisation (qui/où) ; Rangement (où); Linge assorti -->
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-        <th scope="col">Type</th>
-        <th scope="col">Thème/Couleur</th>
+        <th scope="col">Item</th>
+        
         <th scope="col">Utilisation</th>
         <th scope="col">Rangé</th>
         <th scope="col">Linge assorti</th>	  
@@ -27,8 +27,7 @@
     foreach ($linge as $row){
         $piece_linge = getPieceForItem($row["iditem"]);
         echo "<tr>
-        <td>".$row['t_libelle']." (".$row['largeur']."x".$row['longeur'].")"."</td>  
-        <td>";
+        <td>".$row['t_libelle']." (".$row['largeur']."x".$row['longeur'].") ";
         if ($row['theme'] != NULL && $row['couleur'] != NULL){
             echo "Imprimé ".$row['theme']." ".$row['couleur'];
             }
