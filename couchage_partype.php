@@ -76,17 +76,30 @@
                                             }    
                                         echo $row_t['quantite']." ".$row_t['matiere'];
                                     }
-                                    elseif ($row_t['fk_type'] == 9 && $row_c['fk_appartenance'] == $row_t['fk_appartenance']){
-                                        if ($first == false){
-                                                echo ", ";
-                                            }
-                                            else {
-                                                $first = false;
-                                            }    
-                                        echo $row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur'];
-                                    } 
                                 }
-                                "</tr>";
+                                
+                                // retour à la ligne si type différent
+                                $different = true;
+                                
+                                $first = true;
+                                foreach ($tout_lit as $row_t){
+                                    if ($different == false){
+                                        if ($row_t['fk_type'] == 9 && $row_c['fk_appartenance'] == $row_t['fk_appartenance']){
+                                            if ($first == false){
+                                                    echo ", ";
+                                                }
+                                                else {
+                                                    $first = false;
+                                                }    
+                                            echo $row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur'];
+                                        }                                    
+                                    }
+                                    else {
+                                        echo '<br>';
+                                        $different = false;
+                                    }
+                                }
+                                "</td></tr>";
                             }
                         }
                     ?>

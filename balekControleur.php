@@ -117,7 +117,10 @@ function getToutForCouchage()
                                           ON ta.idtaille = i.fk_taille AND t.idtype = i.fk_type AND a.idappartenance = fk_appartenance
                                           WHERE
                                            i.fk_type >= 5
-                                          GROUP by matiere, fk_taille, fk_type, theme, couleur, fk_appartenance")->fetchAll();
+                                          GROUP by 
+                                            matiere, fk_taille, fk_type, theme, couleur, fk_appartenance
+                                          ORDER BY 
+                                            i.fk_type")->fetchAll();
         return $literie_couchage;
     } 
     catch (PDOException $e) 
