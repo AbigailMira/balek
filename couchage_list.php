@@ -72,27 +72,25 @@
   </tbody>
 </table>
 
-<!-- Button to Open the Modal -->
-<!--<a data-toggle="modal" href="#myModal">Open Modal</a>-->
 
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-<!--       Modal Header -->
+<!--Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title"> variable </h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
-<!--       Modal body -->
+<!--Modal body -->
       <div class="modal-body">
         <img src=" variable "
              alt="pas d'image disponible" width="100%" height="100%">
       </div>
 
-<!--       Modal footer -->
+<!--Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
@@ -101,13 +99,12 @@
   </div>
 </div>
 
-
+<!--the Modal script, using data attributes with Bootstrap 4-->
 <script language='javascript'>
 $('#myModal').on('show.bs.modal', function (event) {
-  var imgName = $(event.relatedTarget) // Button that triggered the modal
-  var imgSource = imgName.data('img') // Extract info from data-* attributes
+  var imgName = $(event.relatedTarget) // link that triggered the modal
+  var imgSource = imgName.data('img') // Extract info from data-* attributes : -img and -title
   var imgTitle = imgName.data('title')
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   modal.find('.modal-title').text(imgTitle)

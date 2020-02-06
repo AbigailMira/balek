@@ -20,7 +20,7 @@
 			$PAGE_TITLE = "Linge";
 			break;
 		case "/balek/couchage_partype.php":
-			$CURRENT_PAGE = "Par type"; 
+			$CURRENT_PAGE = "Partype"; 
 			$PAGE_TITLE = "Partype";
 			break;
 		default:

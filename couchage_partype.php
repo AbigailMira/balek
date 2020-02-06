@@ -57,7 +57,7 @@
                                             else {
                                                 $first = false;
                                             }    
-                                        echo $row_t['theme']." ".$row_t['couleur'];
+                                        echo "<a data-toggle="."modal"." href="."#myModal"." data-img='".$row_t['img_url']."' data-title='".$row_t['theme']."'>Imprimé ".$row_t['theme']." ".$row_t['couleur']."</a>";
                                     } 
                                 }
                                 echo "</td>";
@@ -93,7 +93,8 @@
                                                     echo "Housses : ";
                                                     $first = false;
                                                 }    
-                                            echo $row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur'];
+                                            echo "<a data-toggle="."modal"." href="."#myModal"." data-img='".$row_t['img_url']."' data-title='".$row_t['theme']."'>".$row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur']."</a>";
+
                                         }                                    
                                     }
                                     else {
@@ -154,7 +155,7 @@
                                             else {
                                                 $first = false;
                                             }    
-                                        echo $row_t['theme']." ".$row_t['couleur'];
+                                            echo "<a data-toggle="."modal"." href="."#myModal"." data-img='".$row_t['img_url']."' data-title='".$row_t['theme']."'>".$row_t['theme']." ".$row_t['couleur']."</a>";
                                     } 
                                 }
                                 echo "</td>";
@@ -189,7 +190,7 @@
                                                     echo "Housses : ";
                                                     $first = false;
                                                 }    
-                                            echo $row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur'];
+                                            echo "<a data-toggle="."modal"." href="."#myModal"." data-img='".$row_t['img_url']."' data-title='".$row_t['theme']."'>".$row_t['quantite']." ".$row_t['theme']." ".$row_t['couleur']."</a>";
                                         }                                    
                                     }
                                     else {
@@ -202,10 +203,48 @@
                         }
                     ?>
                 </tbody>
-            </table>
+            </table>            
         </div>
     </div>
 </div>
+    
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+    <!--Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+    <!--Modal body -->
+      <div class="modal-body">
+        <img src=""
+             alt="pas d'image disponible" width="100%" height="100%">
+      </div>
+
+    <!--Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--the Modal script, using data attributes with Bootstrap 4-->
+<script language='javascript'>
+$('#myModal').on('show.bs.modal', function (event) {
+  var imgName = $(event.relatedTarget) // link that triggered the modal
+  var imgSource = imgName.data('img') // Extract info from data-* attributes : -img and -title
+  var imgTitle = imgName.data('title')
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text(imgTitle)
+  modal.find('.modal-body img').attr("src", imgSource)
+}) 
+</script>
 
 <?php include("includes/footer.php");?>
 
